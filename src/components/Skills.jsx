@@ -74,7 +74,7 @@ export default function Skills() {
   }).filter(Boolean);
 
   return (
-    <section id="skills" className="py-24 bg-zinc-50 dark:bg-zinc-950/40/60 relative overflow-hidden">
+    <section id="skills" className="py-24 bg-zinc-50 dark:bg-zinc-950/60 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -197,7 +197,7 @@ export default function Skills() {
         </div>
 
         {/* Highlighted Tech Stack Chips Footer */}
-        <div className="mt-12 p-6 rounded-3xl bg-white dark:bg-zinc-900/30/80 border border-zinc-200 dark:border-zinc-800/60 text-center">
+        <div className="mt-12 p-6 rounded-3xl bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/60 text-center">
           <p className="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
             Core Production Stack
           </p>

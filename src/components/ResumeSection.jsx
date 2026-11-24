@@ -18,7 +18,7 @@ export default function ResumeSection() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <section id="resume" className="py-24 bg-zinc-50 dark:bg-zinc-950/40/60 relative overflow-hidden">
+    <section id="resume" className="py-24 bg-zinc-50 dark:bg-zinc-950/60 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -154,7 +154,7 @@ export function ModernInterface({ engineer }) {
             </div>
 
             {/* Live Stats Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800/60/80">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800/60">
               {stats.map((s, idx) => (
                 <div key={idx} className="p-2.5 rounded-xl bg-zinc-100/60 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/40">
                   <div className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
