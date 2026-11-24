@@ -4,15 +4,26 @@ import {
   Printer, 
   FileDown, 
   Check, 
-  ExternalLink,
-  Mail,
-  Phone,
-  MapPin,
-  Briefcase,
-  GraduationCap,
-  Code2
+  ExternalLink, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Briefcase, 
+  GraduationCap, 
+  Code2, 
+  Award,
+  Globe,
+  Github,
+  Linkedin
 } from 'lucide-react';
-import { personalInfo, experienceData, projectsData, educationData, honorsAndCertifications } from '../data/portfolioData';
+import { 
+  personalInfo, 
+  experienceData, 
+  projectsData, 
+  educationData, 
+  certificationsData,
+  skillCategories 
+} from '../data/portfolioData';
 
 export default function ResumeModal({ onClose }) {
   useEffect(() => {
@@ -31,7 +42,7 @@ export default function ResumeModal({ onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/85 backdrop-blur-md"
+        className="fixed inset-0 bg-black/75 backdrop-blur-md"
         onClick={onClose}
       ></div>
 
@@ -41,26 +52,26 @@ export default function ResumeModal({ onClose }) {
         {/* Top Control Bar */}
         <div className="p-4 sm:p-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-4 bg-zinc-50 dark:bg-zinc-900/60">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100">
-              Interactive Resume Preview &bull; {personalInfo.name}
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">
+              Resume Preview &bull; {personalInfo.name}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold transition-colors"
-              title="Print Resume or Save as PDF via Browser"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold transition-colors"
+              title="Print Resume or Save as PDF"
             >
               <Printer size={13} />
-              <span className="hidden sm:inline">Print / Save</span>
+              <span className="hidden sm:inline">Print</span>
             </button>
 
             <a
               href={personalInfo.resumePdf}
               download="Saranya_Sree_Resume.pdf"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 text-xs font-bold shadow-sm transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 text-xs font-bold shadow-sm transition-colors"
             >
               <FileDown size={13} />
               <span>Download PDF</span>
@@ -68,7 +79,7 @@ export default function ResumeModal({ onClose }) {
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-full bg-zinc-800 text-zinc-400 hover:text-zinc-100 transition-colors ml-1"
+              className="p-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors ml-1"
             >
               <X size={18} />
             </button>
@@ -79,12 +90,12 @@ export default function ResumeModal({ onClose }) {
         <div className="p-6 sm:p-10 overflow-y-auto bg-white dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm space-y-6 font-sans">
           
           {/* Header */}
-          <div className="border-b border-zinc-300 dark:border-zinc-700/80 pb-5 text-center">
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          <div className="border-b border-zinc-200 dark:border-zinc-800 pb-5 text-center">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
               {personalInfo.fullName}
             </h1>
-            <p className="text-sm font-semibold text-emerald-400 mt-1">
-              {personalInfo.role} &bull; Web &amp; AI Applications
+            <p className="text-sm font-semibold text-lavender-600 dark:text-lavender-400 mt-1">
+              {personalInfo.role} &bull; Full Stack Web &amp; Python Applications
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-zinc-600 dark:text-zinc-400 mt-2 font-mono">
               <span className="flex items-center gap-1"><MapPin size={12} /> {personalInfo.location}</span>
@@ -93,71 +104,80 @@ export default function ResumeModal({ onClose }) {
               <span>&bull;</span>
               <span className="flex items-center gap-1"><Mail size={12} /> {personalInfo.email}</span>
             </div>
+            <div className="flex items-center justify-center gap-4 text-xs font-mono mt-2 text-emerald-600 dark:text-emerald-400">
+              <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1">
+                <Linkedin size={12} /> LinkedIn
+              </a>
+              <span>&bull;</span>
+              <a href={personalInfo.github} target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1">
+                <Github size={12} /> GitHub
+              </a>
+            </div>
           </div>
 
           {/* Professional Summary */}
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 border-b border-emerald-500/20 pb-1 mb-2">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-lavender-600 dark:text-lavender-400 border-b border-zinc-200 dark:border-zinc-800 pb-1 mb-2">
               Professional Summary
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
-              Computer Science graduate (CGPA: 8.62/10) with 1 year professional software engineering experience at Lomaa IT Solutions. Skilled in developing full-stack web applications, RESTful APIs, and AI-driven platforms using Python, FastAPI, React.js, Tailwind CSS, MySQL, and PostgreSQL. Proven ability to build scalable software, solve complex scheduling and computer-vision challenges, and craft clean Apple-grade user interfaces.
+            <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+              {personalInfo.aboutText}
             </p>
           </div>
 
           {/* Technical Skills */}
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 border-b border-emerald-500/20 pb-1 mb-2">
-              Technical &amp; Web Development Skills
+            <h2 className="text-xs font-bold uppercase tracking-widest text-lavender-600 dark:text-lavender-400 border-b border-zinc-200 dark:border-zinc-800 pb-1 mb-2">
+              Technical Proficiencies
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <div><strong className="text-zinc-800 dark:text-zinc-200">Web Development:</strong> Full-Stack Web Architecture, Responsive Design, Single Page Apps (SPA)</div>
-              <div><strong className="text-zinc-800 dark:text-zinc-200">Frontend:</strong> HTML5, CSS3, JavaScript (ES6+), React.js, Tailwind CSS</div>
-              <div><strong className="text-zinc-800 dark:text-zinc-200">Backend &amp; APIs:</strong> Python, FastAPI, Node.js, RESTful Web APIs, Microservices</div>
-              <div><strong className="text-zinc-800 dark:text-zinc-200">Databases:</strong> PostgreSQL, MySQL, Supabase, Relational Modeling</div>
-              <div><strong className="text-zinc-800 dark:text-zinc-200">Tools:</strong> Git, GitHub, VS Code, Postman, Playwright, Linux</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              {skillCategories.map((cat) => (
+                <div key={cat.id} className="p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200 dark:border-zinc-800">
+                  <span className="font-bold text-zinc-900 dark:text-zinc-100">{cat.title}: </span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{cat.skills.map(s => s.name).join(', ')}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Professional Experience */}
+          {/* Experience */}
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 border-b border-emerald-500/20 pb-1 mb-3">
-              Professional Experience
+            <h2 className="text-xs font-bold uppercase tracking-widest text-lavender-600 dark:text-lavender-400 border-b border-zinc-200 dark:border-zinc-800 pb-1 mb-3">
+              Work Experience
+            </h2>
+            <div className="space-y-4">
+              {experienceData.map((exp, idx) => (
+                <div key={idx} className="space-y-1.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                    <div>
+                      <span className="font-bold text-zinc-900 dark:text-white text-sm">{exp.role}</span>
+                      <span className="text-lavender-600 dark:text-lavender-400 font-semibold"> &bull; {exp.company}</span>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">{exp.period}</span>
+                  </div>
+                  <ul className="list-disc list-inside text-xs text-zinc-700 dark:text-zinc-300 space-y-1">
+                    {exp.responsibilities.map((r, rIdx) => (
+                      <li key={rIdx}>{r}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Featured Projects */}
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-lavender-600 dark:text-lavender-400 border-b border-zinc-200 dark:border-zinc-800 pb-1 mb-3">
+              Key Engineering Projects
             </h2>
             <div className="space-y-3">
-              <div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between font-semibold">
-                  <span className="text-zinc-900 dark:text-zinc-100">
-                    Full Stack Python Developer &amp; Web Developer &bull; Lomaa IT Solutions
-                  </span>
-                  <span className="text-xs font-mono text-emerald-400">2024 – Present (1 Year)</span>
-                </div>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 italic mb-1.5">Andhra Pradesh, India</p>
-                <ul className="list-disc list-inside space-y-1 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                  <li>Engineered full-stack web applications and scalable REST APIs utilizing Python, FastAPI, React.js, and MySQL.</li>
-                  <li>Designed modular frontend components with React.js and Tailwind CSS, adhering to modern UI/UX principles.</li>
-                  <li>Collaborated on AI-assisted application concepts (AI Travel Planner, AI Skin Disease Detection, AI Timetable Generator).</li>
-                  <li>Optimized relational database schemas in MySQL and PostgreSQL for reduced latency and high concurrency.</li>
-                  <li>Executed end-to-end testing with Postman and Playwright to maintain high software reliability.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Selected Projects */}
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 border-b border-emerald-500/20 pb-1 mb-3">
-              Selected Projects
-            </h2>
-            <div className="space-y-2.5 text-xs">
-              {projectsData.map((p, idx) => (
-                <div key={idx}>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">
-                    {idx + 1}. {p.title} &mdash; <span className="font-normal text-emerald-400">{p.tagline}</span>
+              {projectsData.map((proj) => (
+                <div key={proj.id} className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-zinc-900 dark:text-zinc-100">{proj.title} ({proj.company})</span>
+                    <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400">{proj.technologies.slice(0, 3).join(', ')}</span>
                   </div>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    {p.summary} <span className="text-zinc-500 font-mono">({p.technologies.join(', ')})</span>
-                  </p>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-300">{proj.shortDescription}</p>
                 </div>
               ))}
             </div>
@@ -165,48 +185,46 @@ export default function ResumeModal({ onClose }) {
 
           {/* Education */}
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 border-b border-emerald-500/20 pb-1 mb-2">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-lavender-600 dark:text-lavender-400 border-b border-zinc-200 dark:border-zinc-800 pb-1 mb-2">
               Education
             </h2>
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between">
-                <div>
-                  <strong className="text-zinc-900 dark:text-zinc-100">B.Tech in Computer Science and Engineering</strong> &bull; The Apollo University
+            <div className="space-y-2">
+              {educationData.map((edu, idx) => (
+                <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between text-xs">
+                  <div>
+                    <span className="font-bold text-zinc-900 dark:text-white">{edu.degree}</span>
+                    <span className="text-zinc-600 dark:text-zinc-400"> &bull; {edu.institution}</span>
+                  </div>
+                  <div className="text-zinc-500 font-mono">
+                    <span>{edu.period} ({edu.grade})</span>
+                  </div>
                 </div>
-                <div className="font-mono text-emerald-400">Nov 2022 – Mar 2026 | CGPA: 8.62/10</div>
-              </div>
-              <div className="flex justify-between">
-                <div>
-                  <strong>Intermediate (MPC)</strong> &bull; Narayana Junior College, Vijayawada
-                </div>
-                <div className="font-mono text-zinc-400">2018 – 2020 | Score: 647</div>
-              </div>
-              <div className="flex justify-between">
-                <div>
-                  <strong>Class X (Secondary School)</strong> &bull; Bhashyam English Medium High School
-                </div>
-                <div className="font-mono text-zinc-400">2017 – 2018 | CGPA: 9.2/10</div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Honors & Certifications */}
+          {/* Certifications */}
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 border-b border-emerald-500/20 pb-1 mb-2">
-              Honors, Certifications &amp; Achievements
+            <h2 className="text-xs font-bold uppercase tracking-widest text-lavender-600 dark:text-lavender-400 border-b border-zinc-200 dark:border-zinc-800 pb-1 mb-2">
+              Certifications &amp; Awards
             </h2>
-            <ul className="list-disc list-inside space-y-1 text-xs text-zinc-700 dark:text-zinc-300">
-              <li>Award and certificate winner in quiz event organized by SDSC SHAR, ISRO.</li>
-              <li>Ethical Hacking and Cybersecurity Workshop — IIT Hyderabad.</li>
-              <li>Inter-College Hackathon — Madanapalle Institute of Technology &amp; Science (MITS).</li>
-              <li>Web and Mobile Development Training — NAVACHIS IT Solutions (HTML, CSS, JS, Angular, Laravel, Flutter).</li>
-            </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              {certificationsData.map((cert, idx) => (
+                <div key={idx} className="text-zinc-700 dark:text-zinc-300">
+                  <span className="font-semibold text-zinc-900 dark:text-white">&bull; {cert.title}</span> – <span className="text-zinc-500">{cert.issuer}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
+        </div>
+
+        {/* Modal Footer */}
+        <div className="p-4 bg-zinc-50 dark:bg-zinc-900/60 border-t border-zinc-200 dark:border-zinc-800 text-center text-xs text-zinc-500 font-mono">
+          Available for Full-Stack Python, React, and Software Engineering positions.
         </div>
 
       </div>
     </div>
   );
 }
-

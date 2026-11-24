@@ -4,82 +4,59 @@
 
 @layer base {
   :root {
-    --bg-primary: #fafafa;
-    --bg-secondary: #f4f4f5;
-    --text-primary: #09090b;
-    --text-secondary: #52525b;
-    --border-color: rgba(228, 228, 231, 0.8);
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --glass-border: rgba(0, 0, 0, 0.08);
+    --bg-page: #fafbfc;
+    --card-surface: #ffffff;
+    --text-heading: #0f172a;
+    --text-body: #475569;
+    --border-subtle: rgba(226, 232, 240, 0.85);
   }
 
   .dark {
-    --bg-primary: #09090b;
-    --bg-secondary: #18181b;
-    --text-primary: #f4f4f5;
-    --text-secondary: #a1a1aa;
-    --border-color: rgba(39, 39, 42, 0.8);
-    --card-bg: rgba(24, 24, 27, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --bg-page: #09090b;
+    --card-surface: rgba(24, 24, 27, 0.7);
+    --text-heading: #f8fafc;
+    --text-body: #94a3b8;
+    --border-subtle: rgba(39, 39, 42, 0.8);
   }
 
   html {
     scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
   }
 
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--bg-page);
+    color: var(--text-body);
     overflow-x: hidden;
   }
 }
 
-/* Custom Glassmorphism */
-.glass-panel {
-  background-color: var(--card-bg);
+/* Linear & Stripe Style Ambient Glows */
+.ambient-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.12) 0%, rgba(244, 114, 182, 0.06) 40%, rgba(52, 211, 153, 0.04) 70%, transparent 100%);
+}
+
+.dark .ambient-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.15) 0%, rgba(244, 114, 182, 0.08) 40%, rgba(52, 211, 153, 0.06) 70%, transparent 100%);
+}
+
+/* Glassmorphism Surface */
+.linear-card {
+  background-color: var(--card-surface);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-nav {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
-}
-
-/* Light mode card elevation */
-html.light .glass-panel,
-html:not(.dark) .glass-panel {
-  background-color: rgba(255, 255, 255, 0.88);
-  border-color: rgba(228, 228, 231, 0.9);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-}
-
-/* Subtle Emerald Glow */
-.emerald-glow {
-  box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.18);
-}
-
-.emerald-glow-sm {
-  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.25);
-}
-
-/* Apple Light Mode Shadows */
-html:not(.dark) .shadow-xl,
-html.light .shadow-xl {
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
-}
-
-html:not(.dark) .shadow-2xl,
-html.light .shadow-2xl {
-  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.09), 0 6px 14px -3px rgba(0, 0, 0, 0.04);
+.linear-card:hover {
+  border-color: rgba(167, 139, 250, 0.35);
+  box-shadow: 0 12px 32px -8px rgba(167, 139, 250, 0.08);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -87,35 +64,10 @@ html.light .shadow-2xl {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(161, 161, 170, 0.3);
+  background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
 }
 
-html.light ::-webkit-scrollbar-thumb,
-html:not(.dark) ::-webkit-scrollbar-thumb {
-  background: rgba(161, 161, 170, 0.45);
-}
-
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.5);
-}
-
-/* Apple-style gradient text */
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-html:not(.dark) .text-gradient,
-html.light .text-gradient {
-  background: linear-gradient(135deg, #09090b 0%, #52525b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: rgba(167, 139, 250, 0.6);
 }
